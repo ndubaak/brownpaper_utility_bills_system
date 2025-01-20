@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Softpayout</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet"  href="{{ url_for('static', filename='styles/dashboard.css')}}">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>My Dashboard</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#profile"><i class="fas fa-user-circle"></i><span>Profile</span></a></li>
+                <li><a href="#payment"><i class="fas fa-credit-card"></i><span>Payment</span></a></li>
+                <li><a href="#history"><i class="fas fa-history"></i><span>History</span></a></li>
+                <li><a href="#settings"><i class="fas fa-cogs"></i><span>Settings</span></a></li>
+                <li><a href="#logout"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Profile Section -->
+            <section id="profile" class="section">
+                <h1>Profile</h1>
+                <form action="{{ url_for('update_profile') }}" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="{{ customer.fullname }}">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}">
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" name="phone" value="{{ customer.phone_number }}">
+                    <button type="submit">Update Profile</button>
+                </form>
+            </section>
+
+            <!-- Payment Section -->
+            <section id="payment" class="section">
+                <h1>Make a Payment</h1>
+                <form action="{{ url_for('make_payment') }}" method="POST">
+                    <label for="utility">Select Utility:</label>
+                    <select id="utility" name="utility">
+                        {% for utility in utilities %}
+                        <option value="{{ utility.id }}">{{ utility.company_name }} - {{ utility.service_type }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" placeholder="Enter amount">
+                    <button type="submit">Pay Now</button>
+                </form>
+                
+
+                <hr>
+
+                <!-- New Form for Adding a Utility -->
+                <h2>Utility TYPE</h2>
+                <form action="{{ url_for('make_payment') }}" method="POST">
+                    <label for="company_name">Utility Company Name:</label>
+                    <input type="text" id="company_name" name="company_name" placeholder="Enter company name" value="Default Company Name" required>
+
+                    <label for="service_type">Service Type:</label>
+                    <input type="text" id="service_type" name="service_type" placeholder="e.g., Electricity, Water" required>
+
+                    <label for="rate_per_unit">Rate Per Unit:</label>
+                    <input type="number" id="rate_per_unit" name="rate_per_unit" step="0.01" placeholder="Enter rate per unit">
+
+                    <button type="submit">Add Utility</button>
+                </form>
+            </section>
+
+            <!-- History Section -->
+            <section id="history" class="section">
+                <h1>Transaction History</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Utility</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for history in payment_histories %}
+                        <tr>
+                            <td>{{ history.transaction_date }}</td>
+                            <td>{{ history.company_name }}</td>
+                            <td>${{ history.payment.amount_paid }}</td>
+                            <td>{{ history.status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="section">
+                <h1>Settings</h1>
+                <p>Manage your account settings.</p>
+                <label for="notifications">Enable Notifications:</label>
+                <input type="checkbox" id="notifications" name="notifications" checked>
+                <button type="submit">Save Settings</button>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
