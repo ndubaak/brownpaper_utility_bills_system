@@ -53,7 +53,7 @@ We are still working on storing the unstructured data to MangoDB
 
     Clone the Repository:
 
-        git clone https://github.com/yourusername/utility-payment-system.git
+        git clone git@github.com:ndubaak/brownpaper_utility_bills_system.git
 
     Navigate to the Project Directory:
 
@@ -111,7 +111,7 @@ We are still working on storing the unstructured data to MangoDB
     Clone your fork:
 
         
-        git clone https://github.com/yourusername/utility-payment-system.git
+        git clone git@github.com:ndubaak/brownpaper_utility_bills_system.git
     
     Create a new branch:
 
