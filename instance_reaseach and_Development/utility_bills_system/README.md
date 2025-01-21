@@ -1,8 +1,8 @@
-# Utility_Payment_System
+# Utility_bills_System
 Research and project approval by INSTANCE Reasearch and Development for Brown Paper digital
 
 allows customers to View and download Utility bills (such as electrricty, water, and gas) throughh an online application.
-The application serves as digital platform for a utility company, enabling customers to manage their utility accounts, make payments, and view payment history without the need to visit the company office.
+The application serves as digital platform for a utility company, enabling customers to manage their utility accounts, make payments, download and view payment history without the need to visit the company office.
 
 Live Demo: not yet Deployed Site Link
 
